@@ -44,7 +44,11 @@ pipeline {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                sh 'kubectl apply -f https://github.com/linuxacademy/cicd-pipeline-train-schedule-kubernetes/blob/example-solution/train-schedule-kube.yml'
+                kubernetesDeploy(
+					kubeConfigId: 'kubeconfig',
+					configs: 'train-schedule-kube.yml',
+					enableConfigSubstitution: true
+				)
             }
         }
     }
